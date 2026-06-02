@@ -1,11 +1,39 @@
 import java.util.*;
 
-class IFreindContactOrganizer1{
+class IFriendContactOrganizer1{
+
+	static int contactID=1;
+	static int lastContactID=1;
+	static String name;
+	static String phoneNumber;
+	static String companyName;
+	static int salary;
+	static String DOB;
+	
+	static String searchInput;
+	
+	static int[] ContactIDArr = new int[100];
+	static String[] nameArr = new String[100];
+	static String[] phoneNumberArr=new String[100];
+	static String[] companyNameArr=new String[100];
+	static int[] salaryArr=new int[100];
+	static String[] DOBArr=new String[100];
+
+	public static void generateContactID(int lastContactID){
+		System.out.printf("C%04d\n",lastContactID);
+	}
 
     public static void addContacts(){
         Scanner input=new Scanner(System.in);
 
-        
+        System.out.println("+-----------------------------------------------------+");
+		System.out.printf("%50s","Add Contact to the list                        \n");
+		System.out.println("+-----------------------------------------------------+\n\n");
+
+		generateContactID(lastContactID);
+
+
+
     }
 
     public static void main(String[] args) {
@@ -43,6 +71,7 @@ class IFreindContactOrganizer1{
 
         switch(option){
             case 1:
+				addContacts();
                 break;
             case 2:
                 break;
@@ -58,5 +87,6 @@ class IFreindContactOrganizer1{
                 System.out.println("Enter an valide option - between 1-6.");                
 
         }
-    }}
+    }
 }
+
