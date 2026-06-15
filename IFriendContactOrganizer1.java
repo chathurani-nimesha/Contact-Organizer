@@ -27,7 +27,7 @@ class IFriendContactOrganizer1{
         Scanner input=new Scanner(System.in);
 
         System.out.println("+-----------------------------------------------------+");
-		System.out.printf("%50s","Add Contact to the list                        \n");
+		System.out.printf("|%50s","Add Contact to the list                        \n");
 		System.out.println("+-----------------------------------------------------+\n\n");
 
 		generateContactID(lastContactID);
