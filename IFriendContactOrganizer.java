@@ -10,12 +10,12 @@ class IFriendContactOrganizer {
     static String companyName;
     static int salary;
 
-    static int[] contactIdArray=new int[lastContactID];
-    static String[] phoneNumberArray=new String[lastContactID];
-    static String[] nameArray=new String[lastContactID];
-    static String[] companyNameArray=new String[lastContactID];
-    static int[] salaryArray=new int[lastContactID];
-    static String[] dateOfBirthDayArray=new String[lastContactID];
+    static int[] contactIdArray=new int[1];
+    static String[] phoneNumberArray=new String[1];
+    static String[] nameArray=new String[1];
+    static String[] companyNameArray=new String[1];
+    static int[] salaryArray=new int[1];
+    static String[] dateOfBirthDayArray=new String[1];
 
     public static boolean isValidBirthDay(String bDay){
         LocalDate localdate = LocalDate.parse(bDay);
@@ -27,7 +27,7 @@ class IFriendContactOrganizer {
 		int currentYear = currentDate.getYear();
 		
 		
-		if(birthyear > 1926 && birthyear < currentYear && 12> birthmonth && birthmonth > 0 && birthdate >0 &&  birthdate <30){
+		if(birthyear > 1926 && birthyear < currentYear && 12> birthmonth && birthmonth > 0 && birthdate >0 &&  birthdate <=30){
 			return true;
 		}else{
 			return false;
@@ -42,17 +42,26 @@ class IFriendContactOrganizer {
     }
 
     public static boolean isValidatePhoneNumber(String phoneNumber){
-        if(phoneNumber.length()==10 && phoneNumber.charAt(0)=='0'){
-            return true;
-        }else{
+        if(phoneNumber.length()!=10 || phoneNumber.charAt(0)!='0'){
             return false;
+        }else{
+            return true;
         }
     }
     public static void generateContactID(int lastContactID){
-        lastContactID++;
-        System.out.printf("S%04d\n",lastContactID);
+        System.out.printf("S%04d\n",lastContactID+1);
         System.out.println("=======");
     }
+
+    private static void incrementArray(){
+         int[] temContactIdArray=new int[nameArray.length+1];
+         String[] temphoneNumberArray=new String[nameArray.length+1];
+         String[] tempnameArray=new String[nameArray.length+1];
+         String[] tempcompanyNameArray=new String[nameArray.length+1];
+         int[] tempsalaryArray=new int[nameArray.length+1];
+         String[] tempdateOfBirthDayArray=new String[nameArray.length+1];
+    }
+
     public static void addContacts(){
         Scanner input=new Scanner(System.in);
 
@@ -63,35 +72,56 @@ class IFriendContactOrganizer {
         generateContactID(lastContactID);
         System.out.printf("Name%15s",":");
         name=input.nextLine();
-        input.next();
 
         L1:while (true) { 
             System.out.printf("Phone Number%7s",":");
             phoneNumber=input.nextLine();
-            input.next();
-            if((isValidatePhoneNumber(phoneNumber))!=true){
+            if((isValidatePhoneNumber(phoneNumber))==false){
                 System.out.println("\tInvalid Phone Number...");
                 continue L1;
             }
             System.out.printf("Company Name%7s",":");
             companyName=input.nextLine();
-            input.next();
 
             System.out.printf("Salary%13s",":");
             salary=input.nextInt();
+            input.nextLine();
+
             if(!isValidSalary(salary)){
                 System.out.println("Salary sholud be positive");
             }
             L2: while (true) { 
                 System.out.printf("B'Day(YYYY-MM-DD)%2s",":");
                 bDay=input.nextLine();
-                input.next();  
                 if(!isValidBirthDay(bDay)){
                     System.out.println("Invalid Birthday...");
                     continue L2;
                 }
+                break;
             }
+            break;
         }
+        lastContactID++;
+        System.out.println("\n\n\t\tYour contact has been added successfully...");
+
+        //add to arrays
+        incrementArray();
+        contactIdArray[nameArray.length-1]=lastContactID;
+        nameArray[nameArray.length-1]=name;
+        phoneNumberArray[nameArray.length-1]=phoneNumber;
+        companyNameArray[nameArray.length-1]=companyName;
+        salaryArray[nameArray.length-1]=salary;
+        dateOfBirthDayArray[nameArray.length-1]=bDay;
+
+        System.out.print("Do you want to add another contact(Y/N): ");
+        String option=input.nextLine();
+
+        if(option.charAt(0)=='Y' ||option.charAt(0)=='y'){
+            addContacts();
+        }else{
+            homePage();
+        }
+
     }
 
     public static void updateContacts(){
@@ -103,7 +133,7 @@ class IFriendContactOrganizer {
     public static void searchContacts(){}
 
     public static void listContacts(){}
-    public static void main(String args[]){
+    public static void homePage(){
         Scanner input=new Scanner(System.in);
 
         System.out.printf("%79s", " /$$ /$$$$$$$$  /$$$$$$$  /$$$$$$ /$$$$$$$$ /$$   /$$ /$$$$$$$\n");
@@ -150,11 +180,18 @@ class IFriendContactOrganizer {
                 listContacts();
                 break;
             case 6:
-                //exit();
-                //break;
+                System.out.println("Good Bye......");
+                return;
             default:
                 System.out.println("Enter a valid option...");
 
         }
+
+    }
+    public static void main(String args[]){
+        Scanner input=new Scanner(System.in);
+
+        homePage();
+        
     }
 }
