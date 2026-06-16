@@ -1,3 +1,4 @@
+
 import java.time.LocalDate;
 import java.util.*;
 class IFriendContactOrganizer {
@@ -134,22 +135,13 @@ class IFriendContactOrganizer {
     }
 
     public static void updateShowContacts(String update){
-        /*if(update.charAt(0)=='0' && update.length()==10){
-            for(int i=0;i<nameArray.length;i++){
-                System.out.printf("%15s:%s","Contact Id\n",contactIdArray[i]);
-                System.out.printf("%15s:%s","Contact Id\n",contactIdArray[i]);
-                System.out.printf("%15s:%s","Contact Id\n",contactIdArray[i]);
-                System.out.printf("%15s:%s","Contact Id\n",contactIdArray[i]);
-                System.out.printf("%15s:%s","Contact Id\n",contactIdArray[i]);
-            }
-        }*/
        for(int i=0;i<nameArray.length;i++){
-        if(nameArray[i] == update){
-            System.out.printf("%15s:%s","Contact Id ",contactIdArray[i]);
-        }else if(phoneNumberArray[i]==update){
-            System.out.printf("%15s:%s","Contact Id ",contactIdArray[i]);
-        }else{
-            System.out.println("The Name or Phone number does not exit...");
+        if(update.equals(nameArray[i]) || update.equals(phoneNumberArray[i])){
+            System.out.printf("Contact ID%15s%s\n",": ",contactIdArray[i]);
+            System.out.printf("Name%15s%s\n",": ",nameArray[i]);
+            System.out.printf("Company Name%15s:%s\n",": ",companyNameArray[i]);
+            System.out.printf("Salary%15s:%d\n",": ",salaryArray[i]);
+            System.out.printf("B'Day(YYYY-MM-DD)%15s:%s\n",": ",dateOfBirthDayArray[i]);
         }
        }
     }
@@ -180,7 +172,7 @@ class IFriendContactOrganizer {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                     UPDATE CONTACT                                  |");
         System.out.println("+---------------------------------------------------------------------+\n\n");
-        System.out.print("\nSearch contact by Name or Phone Number - ");
+        System.out.print("Search contact by Name or Phone Number - ");
         String update=input.nextLine();
 
         updateShowContacts(update);
