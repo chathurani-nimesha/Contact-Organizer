@@ -60,6 +60,13 @@ class IFriendContactOrganizer {
          String[] tempcompanyNameArray=new String[nameArray.length+1];
          int[] tempsalaryArray=new int[nameArray.length+1];
          String[] tempdateOfBirthDayArray=new String[nameArray.length+1];
+
+         nameArray=tempnameArray;
+         phoneNumberArray=temphoneNumberArray;
+         companyNameArray=tempcompanyNameArray;
+         contactIdArray=temContactIdArray;
+         salaryArray=tempsalaryArray;
+         dateOfBirthDayArray=tempdateOfBirthDayArray;
     }
 
     public static void addContacts(){
@@ -113,7 +120,9 @@ class IFriendContactOrganizer {
         salaryArray[nameArray.length-1]=salary;
         dateOfBirthDayArray[nameArray.length-1]=bDay;
 
-        System.out.print("Do you want to add another contact(Y/N): ");
+
+
+        System.out.print("\nDo you want to add another contact(Y/N): ");
         String option=input.nextLine();
 
         if(option.charAt(0)=='Y' ||option.charAt(0)=='y'){
@@ -124,8 +133,82 @@ class IFriendContactOrganizer {
 
     }
 
-    public static void updateContacts(){
+    public static void updateShowContacts(String update){
+        /*if(update.charAt(0)=='0' && update.length()==10){
+            for(int i=0;i<nameArray.length;i++){
+                System.out.printf("%15s:%s","Contact Id\n",contactIdArray[i]);
+                System.out.printf("%15s:%s","Contact Id\n",contactIdArray[i]);
+                System.out.printf("%15s:%s","Contact Id\n",contactIdArray[i]);
+                System.out.printf("%15s:%s","Contact Id\n",contactIdArray[i]);
+                System.out.printf("%15s:%s","Contact Id\n",contactIdArray[i]);
+            }
+        }*/
+       for(int i=0;i<nameArray.length;i++){
+        if(nameArray[i] == update){
+            System.out.printf("%15s:%s","Contact Id ",contactIdArray[i]);
+        }else if(phoneNumberArray[i]==update){
+            System.out.printf("%15s:%s","Contact Id ",contactIdArray[i]);
+        }else{
+            System.out.println("The Name or Phone number does not exit...");
+        }
+       }
+    }
+    
+    public static void updateName(String update){
+        Scanner input=new Scanner(System.in);
 
+        System.out.println("Update Name");
+        System.out.println("==============");
+
+        System.out.print("input new name - ");
+        String newName=input.nextLine();
+        
+        
+    }
+    public static void updatePhoneNumber(){
+
+    }
+    public static void updateCompanyName(){
+
+    }
+    public static void updateSalary(){
+
+    }
+    public static void updateContacts(){
+        Scanner input=new Scanner(System.in);
+
+        System.out.println("+---------------------------------------------------------------------+");
+        System.out.println("|                     UPDATE CONTACT                                  |");
+        System.out.println("+---------------------------------------------------------------------+\n\n");
+        System.out.print("\nSearch contact by Name or Phone Number - ");
+        String update=input.nextLine();
+
+        updateShowContacts(update);
+        System.out.println("\n\nWhat do you want to update...");
+        System.out.println("\t[01] Name");
+        System.out.println("\t[02] Phone Number");
+        System.out.println("\t[03] Company Name");
+        System.out.println("\t[04] Salary");
+
+        System.out.print("Enter an option to continue - ");
+        option=input.nextInt();
+
+        switch (option) {
+            case 1 :
+                updateName(update);
+                break;
+            case 2:
+                updatePhoneNumber();
+                break;
+            case 3:
+                updateCompanyName();
+                break;
+            case 4:
+                updateSalary();
+                break;
+            default:
+                System.out.println("Enter an valid option...");
+        }
     }
 
     public static void deleteContacts(){}
