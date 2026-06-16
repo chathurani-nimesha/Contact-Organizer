@@ -63,6 +63,15 @@ class IFriendContactOrganizer {
          int[] tempsalaryArray=new int[nameArray.length+1];
          String[] tempdateOfBirthDayArray=new String[nameArray.length+1];
 
+         for(int i=0;i<nameArray.length;i++){
+            temContactIdArray[i]=contactIdArray[i];
+            temphoneNumberArray[i] = phoneNumberArray[i];
+            tempnameArray[i] = nameArray[i];
+            tempcompanyNameArray[i] = companyNameArray[i];
+            tempsalaryArray[i] = salaryArray[i];
+            tempdateOfBirthDayArray[i] = dateOfBirthDayArray[i];
+         }
+
          nameArray=tempnameArray;
          phoneNumberArray=temphoneNumberArray;
          companyNameArray=tempcompanyNameArray;
@@ -136,13 +145,12 @@ class IFriendContactOrganizer {
     public static void updateShowContacts(String update){
        for(int i=0;i<nameArray.length;i++){
         if(update.equals(nameArray[i]) || update.equals(phoneNumberArray[i])){
-            System.out.printf("Contact ID%15sS%04d\n",": ",contactIdArray[i]);
-            System.out.printf("Name%15s%s\n",": ",nameArray[i]);
-            System.out.printf("Company Name%15s:%s\n",": ",companyNameArray[i]);
-            System.out.printf("Salary%15s:%d\n",": ",salaryArray[i]);
-            System.out.printf("B'Day(YYYY-MM-DD)%15s:%s\n",": ",dateOfBirthDayArray[i]);
-        }else{
-            System.out.println("The name or phone number does not exit.");
+            System.out.printf("%30s%10s%s%04d\n","Contact ID",": ","S",contactIdArray[i]);
+            System.out.printf("%30s%10s%s\n","Name",": ",nameArray[i]);
+            System.out.printf("%30s%10s%s\n","Phone Number",": ",phoneNumberArray[i]);
+            System.out.printf("%30s%10s%s\n","Company Name",": ",companyNameArray[i]);
+            System.out.printf("%30s%10s%d\n","Salary",": ",salaryArray[i]);
+            System.out.printf("%30s%10s%s\n","B'Day(YYYY-MM-DD)",": ",dateOfBirthDayArray[i]);
         }
        }
     }
@@ -169,7 +177,7 @@ class IFriendContactOrganizer {
         System.out.println("\n\tContact has been added successfully...");
 
         for (int i = 0; i <nameArray.length; i++) {
-            if(update.equals(nameArray[i])){
+            if(update.equals(nameArray[i]) || update.equals(phoneNumberArray[i])){
                 nameArray[i]=newName;
             }
         }
@@ -186,7 +194,7 @@ class IFriendContactOrganizer {
         System.out.println("\n\tContact has been added successfully...");
 
         for (int i = 0; i <phoneNumberArray.length; i++) {
-            if(update.equals(phoneNumberArray[i])){
+            if(update.equals(phoneNumberArray[i])|| update.equals(nameArray[i])){
                 phoneNumberArray[i]=newPhoneNumber;
             }
         }
