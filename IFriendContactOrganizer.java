@@ -4,6 +4,7 @@ import java.util.*;
 class IFriendContactOrganizer {
     static int option;
     static int lastContactID=0;
+    static String updateAnother;
 
     static String name;
     static String phoneNumber;
@@ -121,12 +122,10 @@ class IFriendContactOrganizer {
         salaryArray[nameArray.length-1]=salary;
         dateOfBirthDayArray[nameArray.length-1]=bDay;
 
-
-
         System.out.print("\nDo you want to add another contact(Y/N): ");
-        String option=input.nextLine();
+        updateAnother=input.nextLine();
 
-        if(option.charAt(0)=='Y' ||option.charAt(0)=='y'){
+        if(updateAnother.charAt(0)=='Y' ||updateAnother.charAt(0)=='y'){
             addContacts();
         }else{
             homePage();
@@ -137,13 +136,26 @@ class IFriendContactOrganizer {
     public static void updateShowContacts(String update){
        for(int i=0;i<nameArray.length;i++){
         if(update.equals(nameArray[i]) || update.equals(phoneNumberArray[i])){
-            System.out.printf("Contact ID%15s%s\n",": ",contactIdArray[i]);
+            System.out.printf("Contact ID%15sS%04d\n",": ",contactIdArray[i]);
             System.out.printf("Name%15s%s\n",": ",nameArray[i]);
             System.out.printf("Company Name%15s:%s\n",": ",companyNameArray[i]);
             System.out.printf("Salary%15s:%d\n",": ",salaryArray[i]);
             System.out.printf("B'Day(YYYY-MM-DD)%15s:%s\n",": ",dateOfBirthDayArray[i]);
+        }else{
+            System.out.println("The name or phone number does not exit.");
         }
        }
+    }
+    public static void updateAnother(){
+        Scanner input=new Scanner(System.in);
+        System.out.println("Do you want to update another contact (Y/N): ");
+        updateAnother=input.nextLine();
+
+        if(updateAnother.charAt(0)=='Y'|| updateAnother.charAt(0)=='y'){
+            updateContacts();
+        }else{
+            homePage();
+        }
     }
     
     public static void updateName(String update){
@@ -154,17 +166,63 @@ class IFriendContactOrganizer {
 
         System.out.print("input new name - ");
         String newName=input.nextLine();
-        
-        
-    }
-    public static void updatePhoneNumber(){
+        System.out.println("\n\tContact has been added successfully...");
 
+        for (int i = 0; i <nameArray.length; i++) {
+            if(update.equals(nameArray[i])){
+                nameArray[i]=newName;
+            }
+        }
+        updateAnother();
     }
-    public static void updateCompanyName(){
+    public static void updatePhoneNumber(String update){
+        Scanner input=new Scanner(System.in);
 
+        System.out.println("Update Phone Number");
+        System.out.println("======================");
+
+        System.out.print("input new phone number - ");
+        String newPhoneNumber=input.nextLine();
+        System.out.println("\n\tContact has been added successfully...");
+
+        for (int i = 0; i <phoneNumberArray.length; i++) {
+            if(update.equals(phoneNumberArray[i])){
+                phoneNumberArray[i]=newPhoneNumber;
+            }
+        }
+        updateAnother();
     }
-    public static void updateSalary(){
+    public static void updateCompanyName(String update){
+        Scanner input=new Scanner(System.in);
+        System.out.println("Update Company Name");
+        System.out.println("======================");
 
+        System.out.print("Input new Company Name - ");
+        String newCompanyName=input.nextLine();
+        System.out.println("\n\tContact has been added successfully...");
+
+        for (int i = 0; i <phoneNumberArray.length; i++) {
+           if(update.equals(nameArray[i]) || update.equals(phoneNumberArray[i])){
+            companyNameArray[i]=newCompanyName;
+           }
+        }
+        updateAnother();
+    }
+    public static void updateSalary(String update){
+        Scanner input=new Scanner(System.in);
+        System.out.println("Update Salary");
+        System.out.println("===============");
+
+        System.out.print("Input new Salary - ");
+        int newSalary=input.nextInt();
+        System.out.println("\n\tContact has been added successfully...");
+
+        for (int i = 0; i <phoneNumberArray.length; i++) {
+           if(update.equals(nameArray[i]) || update.equals(phoneNumberArray[i])){
+            salaryArray[i]=newSalary;
+           }
+        }
+        updateAnother();
     }
     public static void updateContacts(){
         Scanner input=new Scanner(System.in);
@@ -176,13 +234,13 @@ class IFriendContactOrganizer {
         String update=input.nextLine();
 
         updateShowContacts(update);
-        System.out.println("\n\nWhat do you want to update...");
+        System.out.println("\n\nWhat do you want to update...\n");
         System.out.println("\t[01] Name");
         System.out.println("\t[02] Phone Number");
         System.out.println("\t[03] Company Name");
         System.out.println("\t[04] Salary");
 
-        System.out.print("Enter an option to continue - ");
+        System.out.print("\nEnter an option to continue -> ");
         option=input.nextInt();
 
         switch (option) {
@@ -190,13 +248,13 @@ class IFriendContactOrganizer {
                 updateName(update);
                 break;
             case 2:
-                updatePhoneNumber();
+                updatePhoneNumber(update);
                 break;
             case 3:
-                updateCompanyName();
+                updateCompanyName(update);
                 break;
             case 4:
-                updateSalary();
+                updateSalary(update);
                 break;
             default:
                 System.out.println("Enter an valid option...");
