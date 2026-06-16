@@ -4,7 +4,8 @@ import java.util.*;
 class IFriendContactOrganizer {
     static int option;
     static int lastContactID=0;
-    static String updateAnother;
+    static String Another;
+    static String deleteValue;
 
     static String name;
     static String phoneNumber;
@@ -132,9 +133,9 @@ class IFriendContactOrganizer {
         dateOfBirthDayArray[nameArray.length-1]=bDay;
 
         System.out.print("\nDo you want to add another contact(Y/N): ");
-        updateAnother=input.nextLine();
+        Another=input.nextLine();
 
-        if(updateAnother.charAt(0)=='Y' ||updateAnother.charAt(0)=='y'){
+        if(Another.charAt(0)=='Y' ||Another.charAt(0)=='y'){
             addContacts();
         }else{
             homePage();
@@ -157,9 +158,9 @@ class IFriendContactOrganizer {
     public static void updateAnother(){
         Scanner input=new Scanner(System.in);
         System.out.println("Do you want to update another contact (Y/N): ");
-        updateAnother=input.nextLine();
+        Another=input.nextLine();
 
-        if(updateAnother.charAt(0)=='Y'|| updateAnother.charAt(0)=='y'){
+        if(Another.charAt(0)=='Y'|| Another.charAt(0)=='y'){
             updateContacts();
         }else{
             homePage();
@@ -191,6 +192,7 @@ class IFriendContactOrganizer {
 
         System.out.print("input new phone number - ");
         String newPhoneNumber=input.nextLine();
+        isValidatePhoneNumber(newPhoneNumber);
         System.out.println("\n\tContact has been added successfully...");
 
         for (int i = 0; i <phoneNumberArray.length; i++) {
@@ -223,6 +225,7 @@ class IFriendContactOrganizer {
 
         System.out.print("Input new Salary - ");
         int newSalary=input.nextInt();
+        isValidSalary(newSalary);
         System.out.println("\n\tContact has been added successfully...");
 
         for (int i = 0; i <phoneNumberArray.length; i++) {
@@ -268,12 +271,71 @@ class IFriendContactOrganizer {
                 System.out.println("Enter an valid option...");
         }
     }
+    public static void decrementArray(String deleteValue){
+        int[] temContactIdArray=new int[nameArray.length-1];
+         String[] temphoneNumberArray=new String[nameArray.length-1];
+         String[] tempnameArray=new String[nameArray.length-1];
+         String[] tempcompanyNameArray=new String[nameArray.length-1];
+         int[] tempsalaryArray=new int[nameArray.length-1];
+         String[] tempdateOfBirthDayArray=new String[nameArray.length-1];
 
-    public static void deleteContacts(){}
+         for(int i=0;i<nameArray.length;i++){
+            if(deleteValue.equals(nameArray[i]) || deleteValue.equals(phoneNumberArray[i])){
+                continue;
+            }else{
+                temContactIdArray[i]=contactIdArray[i];
+                temphoneNumberArray[i] = phoneNumberArray[i];
+                tempnameArray[i] = nameArray[i];
+                tempcompanyNameArray[i] = companyNameArray[i];
+                tempsalaryArray[i] = salaryArray[i];
+                tempdateOfBirthDayArray[i] = dateOfBirthDayArray[i];
+            }
+         }
+
+         nameArray=tempnameArray;
+         phoneNumberArray=temphoneNumberArray;
+         companyNameArray=tempcompanyNameArray;
+         contactIdArray=temContactIdArray;
+         salaryArray=tempsalaryArray;
+         dateOfBirthDayArray=tempdateOfBirthDayArray;
+    }
+    public static void deleteContacts(){
+        Scanner input=new Scanner(System.in);
+
+        System.out.println("+---------------------------------------------------------------------+");
+        System.out.println("|                     DELETE CONTACT                                  |");
+        System.out.println("+---------------------------------------------------------------------+\n\n");
+        System.out.print("Search contact by Name or Phone Number - ");
+        deleteValue=input.nextLine();
+
+        updateShowContacts(deleteValue);
+
+        System.out.print("\nDo you want to Delete this contact (Y/N): ");
+        String deleteYes=input.nextLine();
+
+        if(deleteYes.charAt(0)=='Y'|| deleteYes.charAt(0)=='y'){
+            decrementArray(deleteValue);
+            /*for(int i=0;i< nameArray.length;i++){
+                if(deleteValue.equals(nameArray[i]) || deleteValue.equals(phoneNumberArray[i])){
+                    decrementArray();
+                }
+            }*/
+        }
+        System.out.println("\n\tCustomer has been deleted successfully...");
+        System.out.print("\nDo you want to delete another contact (Y/N) -> ");
+        Another=input.nextLine();
+
+        if (Another.charAt(0)=='Y'|| Another.charAt(0)=='y') {
+            deleteContacts();
+        } else {
+            homePage();
+        }
+    }
 
     public static void searchContacts(){}
 
     public static void listContacts(){}
+
     public static void homePage(){
         Scanner input=new Scanner(System.in);
 
@@ -321,7 +383,7 @@ class IFriendContactOrganizer {
                 listContacts();
                 break;
             case 6:
-                System.out.println("Good Bye......");
+                System.out.println("\n\tGood Bye......");
                 return;
             default:
                 System.out.println("Enter a valid option...");
