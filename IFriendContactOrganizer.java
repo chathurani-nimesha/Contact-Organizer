@@ -6,6 +6,7 @@ class IFriendContactOrganizer {
     static int lastContactID=0;
     static String Another;
     static String deleteValue;
+    static String search;
 
     static String name;
     static String phoneNumber;
@@ -332,7 +333,30 @@ class IFriendContactOrganizer {
         }
     }
 
-    public static void searchContacts(){}
+    public static boolean searchDetails(String search){
+        for(int i=0; i<nameArray.length;i++){
+            if(search.equals(nameArray[i])|| search.equals(phoneNumberArray[i])){
+                return true;
+            }  
+        }
+        return false;
+    }
+    public static void searchContacts(){
+        Scanner input=new Scanner(System.in);
+
+        System.out.println("+---------------------------------------------------------------------+");
+        System.out.println("|                     SEARCH CONTACT                                  |");
+        System.out.println("+---------------------------------------------------------------------+\n\n");
+        System.out.print("Search contact by Name or Phone Number - ");
+        search=input.nextLine();
+
+        searchDetails(search);
+        if(searchDetails(search)==true){
+            
+        }else{
+            System.out.printf("\n\tNo contact found for %s ....",search);
+        }
+    }
 
     public static void listContacts(){}
 
