@@ -14,12 +14,12 @@ class IFriendContactOrganizer {
     static String companyName;
     static int salary;
 
-    static int[] contactIdArray=new int[1];
-    static String[] phoneNumberArray=new String[1];
-    static String[] nameArray=new String[1];
-    static String[] companyNameArray=new String[1];
-    static int[] salaryArray=new int[1];
-    static String[] dateOfBirthDayArray=new String[1];
+    static int[] contactIdArray=new int[0];
+    static String[] phoneNumberArray=new String[0];
+    static String[] nameArray=new String[0];
+    static String[] companyNameArray=new String[0];
+    static int[] salaryArray=new int[0];
+    static String[] dateOfBirthDayArray=new String[0];
 
     public static boolean isValidBirthDay(String bDay){
         LocalDate localdate = LocalDate.parse(bDay);
@@ -144,7 +144,7 @@ class IFriendContactOrganizer {
 
     }
 
-    public static void updateShowContacts(String update){
+    public static void ShowContactsDetails(String update){
        for(int i=0;i<nameArray.length;i++){
         if(update.equals(nameArray[i]) || update.equals(phoneNumberArray[i])){
             System.out.printf("%30s%10s%s%04d\n","Contact ID",": ","S",contactIdArray[i]);
@@ -245,7 +245,7 @@ class IFriendContactOrganizer {
         System.out.print("Search contact by Name or Phone Number - ");
         String update=input.nextLine();
 
-        updateShowContacts(update);
+        ShowContactsDetails(update);
         System.out.println("\n\nWhat do you want to update...\n");
         System.out.println("\t[01] Name");
         System.out.println("\t[02] Phone Number");
@@ -280,16 +280,19 @@ class IFriendContactOrganizer {
          int[] tempsalaryArray=new int[nameArray.length-1];
          String[] tempdateOfBirthDayArray=new String[nameArray.length-1];
 
+         int j=0;
          for(int i=0;i<nameArray.length;i++){
             if(deleteValue.equals(nameArray[i]) || deleteValue.equals(phoneNumberArray[i])){
                 continue;
             }else{
-                temContactIdArray[i]=contactIdArray[i];
-                temphoneNumberArray[i] = phoneNumberArray[i];
-                tempnameArray[i] = nameArray[i];
-                tempcompanyNameArray[i] = companyNameArray[i];
-                tempsalaryArray[i] = salaryArray[i];
-                tempdateOfBirthDayArray[i] = dateOfBirthDayArray[i];
+                temContactIdArray[j]=contactIdArray[i];
+                temphoneNumberArray[j] = phoneNumberArray[i];
+                tempnameArray[j] = nameArray[i];
+                tempcompanyNameArray[j] = companyNameArray[i];
+                tempsalaryArray[j] = salaryArray[i];
+                tempdateOfBirthDayArray[j] = dateOfBirthDayArray[i];
+
+                j++;
             }
          }
 
@@ -309,7 +312,7 @@ class IFriendContactOrganizer {
         System.out.print("Search contact by Name or Phone Number - ");
         deleteValue=input.nextLine();
 
-        updateShowContacts(deleteValue);
+        ShowContactsDetails(deleteValue);
 
         System.out.print("\nDo you want to Delete this contact (Y/N): ");
         String deleteYes=input.nextLine();
@@ -352,9 +355,18 @@ class IFriendContactOrganizer {
 
         searchDetails(search);
         if(searchDetails(search)==true){
-            
+            ShowContactsDetails(search);
         }else{
-            System.out.printf("\n\tNo contact found for %s ....",search);
+            System.out.printf("\n\tNo contact found for %s ....\n",search);
+        }
+
+        System.out.print("\nDo you want to try a new search (Y/N): ");
+        Another=input.nextLine();
+
+        if (Another.charAt(0)=='Y'|| Another.charAt(0)=='y') {
+            searchContacts();
+        } else {
+            homePage();
         }
     }
 
