@@ -284,7 +284,7 @@ class IFriendContactOrganizer {
          for(int i=0;i<nameArray.length;i++){
             if(deleteValue.equals(nameArray[i]) || deleteValue.equals(phoneNumberArray[i])){
                 continue;
-            }else{
+            }
                 temContactIdArray[j]=contactIdArray[i];
                 temphoneNumberArray[j] = phoneNumberArray[i];
                 tempnameArray[j] = nameArray[i];
@@ -293,7 +293,6 @@ class IFriendContactOrganizer {
                 tempdateOfBirthDayArray[j] = dateOfBirthDayArray[i];
 
                 j++;
-            }
          }
 
          nameArray=tempnameArray;
@@ -312,20 +311,19 @@ class IFriendContactOrganizer {
         System.out.print("Search contact by Name or Phone Number - ");
         deleteValue=input.nextLine();
 
-        ShowContactsDetails(deleteValue);
+        for(int i=0;i<nameArray.length;i++){
+            if(deleteValue.equals(nameArray[i]) || deleteValue.equals(phoneNumberArray[i])){
+                ShowContactsDetails(deleteValue);
+                System.out.print("\nDo you want to Delete this contact (Y/N): ");
+                String deleteYes=input.nextLine();
 
-        System.out.print("\nDo you want to Delete this contact (Y/N): ");
-        String deleteYes=input.nextLine();
-
-        if(deleteYes.charAt(0)=='Y'|| deleteYes.charAt(0)=='y'){
-            decrementArray(deleteValue);
-            /*for(int i=0;i< nameArray.length;i++){
-                if(deleteValue.equals(nameArray[i]) || deleteValue.equals(phoneNumberArray[i])){
-                    decrementArray();
+                if(deleteYes.charAt(0)=='Y'|| deleteYes.charAt(0)=='y'){
+                    decrementArray(deleteValue);
+                    System.out.println("\n\tCustomer has been deleted successfully...");
                 }
-            }*/
+            }
         }
-        System.out.println("\n\tCustomer has been deleted successfully...");
+
         System.out.print("\nDo you want to delete another contact (Y/N) -> ");
         Another=input.nextLine();
 
