@@ -22,12 +22,12 @@ class IFriendContactOrganizer {
     static String[] dateOfBirthDayArray=new String[0];
 
     public static boolean isValidBirthDay(String bDay){
-        LocalDate localdate = LocalDate.parse(bDay);
-		int birthyear = localdate.getYear();
-		int birthmonth = localdate.getMonthValue();
-		int birthdate = localdate.getDayOfMonth();
+        LocalDate localdate=LocalDate.parse(bDay);
+		int birthyear=localdate.getYear();
+		int birthmonth=localdate.getMonthValue();
+		int birthdate=localdate.getDayOfMonth();
 
-		LocalDate currentDate = LocalDate.now();
+		LocalDate currentDate =LocalDate.now();
 		int currentYear = currentDate.getYear();
 		
 		
@@ -53,8 +53,8 @@ class IFriendContactOrganizer {
         }
     }
     public static void generateContactID(int lastContactID){
-        System.out.printf("S%04d\n",lastContactID+1);
-        System.out.println("=======");
+        System.out.printf("C%04d\n",lastContactID+1);
+        System.out.println("=======\n");
     }
 
     private static void incrementArray(){
@@ -67,11 +67,11 @@ class IFriendContactOrganizer {
 
          for(int i=0;i<nameArray.length;i++){
             temContactIdArray[i]=contactIdArray[i];
-            temphoneNumberArray[i] = phoneNumberArray[i];
-            tempnameArray[i] = nameArray[i];
-            tempcompanyNameArray[i] = companyNameArray[i];
-            tempsalaryArray[i] = salaryArray[i];
-            tempdateOfBirthDayArray[i] = dateOfBirthDayArray[i];
+            temphoneNumberArray[i]=phoneNumberArray[i];
+            tempnameArray[i]=nameArray[i];
+            tempcompanyNameArray[i]=companyNameArray[i];
+            tempsalaryArray[i]=salaryArray[i];
+            tempdateOfBirthDayArray[i]=dateOfBirthDayArray[i];
          }
 
          nameArray=tempnameArray;
@@ -85,7 +85,7 @@ class IFriendContactOrganizer {
     public static void addContacts(){
         Scanner input=new Scanner(System.in);
 
-        System.out.println("+---------------------------------------------------------------------+");
+        System.out.println("\n+---------------------------------------------------------------------+");
         System.out.println("|                     Add Contacts to the List                        |");
         System.out.println("+---------------------------------------------------------------------+\n\n");
 
@@ -158,7 +158,7 @@ class IFriendContactOrganizer {
     }
     public static void updateAnother(){
         Scanner input=new Scanner(System.in);
-        System.out.println("Do you want to update another contact (Y/N): ");
+        System.out.print("Do you want to update another contact (Y/N): ");
         Another=input.nextLine();
 
         if(Another.charAt(0)=='Y'|| Another.charAt(0)=='y'){
@@ -171,12 +171,12 @@ class IFriendContactOrganizer {
     public static void updateName(String update){
         Scanner input=new Scanner(System.in);
 
-        System.out.println("Update Name");
+        System.out.println("\nUpdate Name");
         System.out.println("==============");
 
-        System.out.print("input new name - ");
+        System.out.print("\nInput new name - ");
         String newName=input.nextLine();
-        System.out.println("\n\tContact has been added successfully...");
+        System.out.println("\n\tContact has been added successfully...\n");
 
         for (int i = 0; i <nameArray.length; i++) {
             if(update.equals(nameArray[i]) || update.equals(phoneNumberArray[i])){
@@ -191,10 +191,10 @@ class IFriendContactOrganizer {
         System.out.println("Update Phone Number");
         System.out.println("======================");
 
-        System.out.print("input new phone number - ");
+        System.out.print("\nInput new phone number - ");
         String newPhoneNumber=input.nextLine();
         isValidatePhoneNumber(newPhoneNumber);
-        System.out.println("\n\tContact has been added successfully...");
+        System.out.println("\n\tContact has been added successfully...\n");
 
         for (int i = 0; i <phoneNumberArray.length; i++) {
             if(update.equals(phoneNumberArray[i])|| update.equals(nameArray[i])){
@@ -208,9 +208,9 @@ class IFriendContactOrganizer {
         System.out.println("Update Company Name");
         System.out.println("======================");
 
-        System.out.print("Input new Company Name - ");
+        System.out.print("\nInput new Company Name - ");
         String newCompanyName=input.nextLine();
-        System.out.println("\n\tContact has been added successfully...");
+        System.out.println("\n\tContact has been added successfully...\n");
 
         for (int i = 0; i <phoneNumberArray.length; i++) {
            if(update.equals(nameArray[i]) || update.equals(phoneNumberArray[i])){
@@ -224,10 +224,10 @@ class IFriendContactOrganizer {
         System.out.println("Update Salary");
         System.out.println("===============");
 
-        System.out.print("Input new Salary - ");
+        System.out.print("\nInput new Salary - ");
         int newSalary=input.nextInt();
         isValidSalary(newSalary);
-        System.out.println("\n\tContact has been added successfully...");
+        System.out.println("\n\tContact has been added successfully...\n");
 
         for (int i = 0; i <phoneNumberArray.length; i++) {
            if(update.equals(nameArray[i]) || update.equals(phoneNumberArray[i])){
@@ -239,12 +239,12 @@ class IFriendContactOrganizer {
     public static void updateContacts(){
         Scanner input=new Scanner(System.in);
 
-        System.out.println("+---------------------------------------------------------------------+");
+        System.out.println("\n+---------------------------------------------------------------------+");
         System.out.println("|                     UPDATE CONTACT                                  |");
         System.out.println("+---------------------------------------------------------------------+\n\n");
         System.out.print("Search contact by Name or Phone Number - ");
         String update=input.nextLine();
-
+        System.out.println("\n");
         ShowContactsDetails(update);
         System.out.println("\n\nWhat do you want to update...\n");
         System.out.println("\t[01] Name");
@@ -372,7 +372,7 @@ class IFriendContactOrganizer {
         Scanner input=new Scanner(System.in);
 
         System.out.println("+-------------------------------------------------------------------------------------------------+");
-        System.out.printf("| %-10s | %-10s | %-15s | %-15s | %-15s | %-15s \n","Contact ID","Name","Phone Number","Company","Salary","Birthday");
+        System.out.printf("| %-10s | %-10s | %-15s | %-15s | %-15s | %-15s |\n","Contact ID","Name","Phone Number","Company","Salary","Birthday");
         System.out.println("+-------------------------------------------------------------------------------------------------+");
 
         for(int i=0;i<nameArray.length;i++){
